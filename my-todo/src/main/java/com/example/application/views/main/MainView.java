@@ -7,19 +7,24 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import java.util.List;
 
 @Route("")
 public class MainView extends VerticalLayout {
-
+  private List<String> languageList = List.of("Polski", "Angielski",
+            "Niemiecki", "Inny");
    private VerticalLayout menu;
   private VerticalLayout form;
 
     public MainView() {
         menu = new VerticalLayout();
         form = new VerticalLayout();
+        BookData data = new BookData();
+        createBookForm(data);
 
 
-        createBookForm();
+
+        createBookForm(data);
 
         add(
                 new H1("Moja biblioteczka"),
@@ -29,7 +34,7 @@ public class MainView extends VerticalLayout {
 
     }
 
-    private void createBookForm() {
+    private void createBookForm(BookData data) {
         //Title
         TextField title = new TextField("Podaj tytuł");
 
@@ -48,8 +53,7 @@ public class MainView extends VerticalLayout {
 
         Select<String> bookLanguage = new Select<>();
         bookLanguage.setLabel("Wybierz język: ");
-        bookLanguage.setItems("Polski", "Angielski",
-                "Niemiecki", "Inny");
+        bookLanguage.setItems(languageList);
         bookLanguage.setValue("Polski");
         bookLanguage.addValueChangeListener(valueChangeEvent -> {
             if (valueChangeEvent.getValue().equals("Inny")) {
@@ -64,7 +68,6 @@ public class MainView extends VerticalLayout {
         addBook.addClickListener(buttonClickEvent -> {
 
             //save book
-            BookData data = new BookData();
             data.setTitle(title.getValue());
             data.setBookCategory(bookCategory.getValue());
             data.setDateRelease(dateRelease.getValue());
@@ -78,7 +81,25 @@ public class MainView extends VerticalLayout {
             System.out.println(data);
         });
 
+        //load data
+        if(data.getTitle() != null) {
+            title.setValue(data.getTitle());
+        }
+        if(data.getBookCategory() != null) {
+            bookCategory.setValue(data.getBookCategory());
+        }
+        if(data.getDateRelease() != null) {
+            dateRelease.setValue(data.getDateRelease());
+        }
+        if(data.getBookLanguage() != null) {
+           if (languageList.contains(data.getBookLanguage())){
+               bookLanguage.setValue(data.getBookLanguage());
+           } else {
+               languageOther.setValue(data.getBookLanguage());
+           }
+        }
+
         //form
-        form.add(title,bookCategory, dateRelease, bookLanguage, languageOther);
+        form.add(title,bookCategory, dateRelease, bookLanguage, languageOther, addBook);
     }
 }
