@@ -1,0 +1,17 @@
+{
+  "frontendFolder": "C:/Users/Gasia/OneDrive/Documents/projektyJava/BookshelfManager/my-todo/./frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "C:/Users/Gasia/OneDrive/Documents/projektyJava/BookshelfManager/my-todo/./frontend/generated/jar-resources",
+  "staticOutput": "C:/Users/Gasia/OneDrive/Documents/projektyJava/BookshelfManager/my-todo/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "C:\\Users\\Gasia\\OneDrive\\Documents\\projektyJava\\BookshelfManager\\my-todo\\target\\classes\\META-INF\\VAADIN\\config",
+  "frontendBundleOutput": "C:\\Users\\Gasia\\OneDrive\\Documents\\projektyJava\\BookshelfManager\\my-todo\\target\\classes\\META-INF\\VAADIN\\webapp",
+  "devBundleOutput": "C:/Users/Gasia/OneDrive/Documents/projektyJava/BookshelfManager/my-todo/src/main/dev-bundle/webapp",
+  "devBundleStatsOutput": "C:/Users/Gasia/OneDrive/Documents/projektyJava/BookshelfManager/my-todo/src/main/dev-bundle/config",
+  "jarResourcesFolder": "C:/Users/Gasia/OneDrive/Documents/projektyJava/BookshelfManager/my-todo/./frontend/generated/jar-resources",
+  "themeName": "mytodo",
+  "clientServiceWorkerSource": "C:\\Users\\Gasia\\OneDrive\\Documents\\projektyJava\\BookshelfManager\\my-todo\\target\\sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
