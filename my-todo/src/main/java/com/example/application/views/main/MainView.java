@@ -9,6 +9,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Route("")
@@ -17,17 +18,13 @@ public class MainView extends VerticalLayout {
             "Niemiecki", "Inny");
    private VerticalLayout menu;
   private VerticalLayout form;
+    private List<BookData> books = new ArrayList<>();
 
     public MainView() {
         menu = new VerticalLayout();
         form = new VerticalLayout();
 
-        Button nextBook = new Button("Następna książka");
-        menu.add(nextBook);
-        nextBook.addClickListener(buttonClickEvent -> {
-            BookData data = new BookData();
-            createBookForm(data);
-        });
+        createMenu();
 
 //        BookData data = new BookData();
 //        data.setTitle("ggfh");
@@ -42,6 +39,36 @@ public class MainView extends VerticalLayout {
                 form
         );
 
+    }
+
+    private void createMenu() {
+        Select<BookData> selectBook = new Select<>("Ksiazki", selectBookValueChangeEvent -> {
+          System.out.println("selectBookValueChangeEvent" +selectBookValueChangeEvent);
+           if (! selectBookValueChangeEvent.getHasValue().isEmpty()) {
+               createBookForm(selectBookValueChangeEvent.getValue());
+           } else {
+               form.removeAll();
+           }
+        });
+        
+        selectBook.setTextRenderer(bookData -> {
+            if(bookData.getTitle()!=null){
+                return "Książka: "+bookData.getTitle();
+            }
+            return "Książka: #" +bookData.hashCode();
+        });
+        menu.add(selectBook);
+
+        Button nextBook = new Button("Następna książka");
+        menu.add(nextBook);
+        nextBook.addClickListener(buttonClickEvent -> {
+            BookData data = new BookData();
+            books.add(data);
+            selectBook.setItems(books);
+            selectBook.setValue(data);
+           // createBookForm(data);
+
+        });
     }
 
     private void createBookForm(BookData data) {
