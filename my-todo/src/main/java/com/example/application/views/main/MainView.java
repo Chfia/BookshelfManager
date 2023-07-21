@@ -7,6 +7,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Route("")
@@ -19,12 +21,20 @@ public class MainView extends VerticalLayout {
     public MainView() {
         menu = new VerticalLayout();
         form = new VerticalLayout();
-        BookData data = new BookData();
-        createBookForm(data);
 
+        Button nextBook = new Button("Następna książka");
+        menu.add(nextBook);
+        nextBook.addClickListener(buttonClickEvent -> {
+            BookData data = new BookData();
+            createBookForm(data);
+        });
 
-
-        createBookForm(data);
+//        BookData data = new BookData();
+//        data.setTitle("ggfh");
+//        data.setBookLanguage("Polski");
+//        data.setDateRelease(LocalDate.of(2020, 12 ,12 ));
+//        data.setBookCategory("Nauka");
+//        createBookForm(data);
 
         add(
                 new H1("Moja biblioteczka"),
@@ -35,6 +45,7 @@ public class MainView extends VerticalLayout {
     }
 
     private void createBookForm(BookData data) {
+        form.removeAll();
         //Title
         TextField title = new TextField("Podaj tytuł");
 
