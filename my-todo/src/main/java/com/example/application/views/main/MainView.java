@@ -14,10 +14,10 @@ import java.util.List;
 
 @Route("")
 public class MainView extends VerticalLayout {
-  private List<String> languageList = List.of("Polski", "Angielski",
+    private List<String> languageList = List.of("Polski", "Angielski",
             "Niemiecki", "Inny");
-   private VerticalLayout menu;
-  private VerticalLayout form;
+    private VerticalLayout menu;
+    private VerticalLayout form;
     private List<BookData> books = new ArrayList<>();
 
     public MainView() {
@@ -25,13 +25,6 @@ public class MainView extends VerticalLayout {
         form = new VerticalLayout();
 
         createMenu();
-
-//        BookData data = new BookData();
-//        data.setTitle("ggfh");
-//        data.setBookLanguage("Polski");
-//        data.setDateRelease(LocalDate.of(2020, 12 ,12 ));
-//        data.setBookCategory("Nauka");
-//        createBookForm(data);
 
         add(
                 new H1("Moja biblioteczka"),
@@ -43,19 +36,19 @@ public class MainView extends VerticalLayout {
 
     private void createMenu() {
         Select<BookData> selectBook = new Select<>("Ksiazki", selectBookValueChangeEvent -> {
-          System.out.println("selectBookValueChangeEvent" +selectBookValueChangeEvent);
-           if (! selectBookValueChangeEvent.getHasValue().isEmpty()) {
-               createBookForm(selectBookValueChangeEvent.getValue());
-           } else {
-               form.removeAll();
-           }
-        });
-        
-        selectBook.setTextRenderer(bookData -> {
-            if(bookData.getTitle()!=null){
-                return "Książka: "+bookData.getTitle();
+            System.out.println("selectBookValueChangeEvent" + selectBookValueChangeEvent);
+            if (!selectBookValueChangeEvent.getHasValue().isEmpty()) {
+                createBookForm(selectBookValueChangeEvent.getValue());
+            } else {
+                form.removeAll();
             }
-            return "Książka: #" +bookData.hashCode();
+        });
+
+        selectBook.setTextRenderer(bookData -> {
+            if (bookData.getTitle() != null) {
+                return "Książka: " + bookData.getTitle();
+            }
+            return "Książka: #" + bookData.hashCode();
         });
         menu.add(selectBook);
 
@@ -66,7 +59,6 @@ public class MainView extends VerticalLayout {
             books.add(data);
             selectBook.setItems(books);
             selectBook.setValue(data);
-           // createBookForm(data);
 
         });
     }
@@ -110,7 +102,7 @@ public class MainView extends VerticalLayout {
             data.setBookCategory(bookCategory.getValue());
             data.setDateRelease(dateRelease.getValue());
 
-            if("Inny".equals(bookLanguage.getValue())) {
+            if ("Inny".equals(bookLanguage.getValue())) {
                 data.setBookLanguage(languageOther.getValue());
 
             } else {
@@ -120,24 +112,24 @@ public class MainView extends VerticalLayout {
         });
 
         //load data
-        if(data.getTitle() != null) {
+        if (data.getTitle() != null) {
             title.setValue(data.getTitle());
         }
-        if(data.getBookCategory() != null) {
+        if (data.getBookCategory() != null) {
             bookCategory.setValue(data.getBookCategory());
         }
-        if(data.getDateRelease() != null) {
+        if (data.getDateRelease() != null) {
             dateRelease.setValue(data.getDateRelease());
         }
-        if(data.getBookLanguage() != null) {
-           if (languageList.contains(data.getBookLanguage())){
-               bookLanguage.setValue(data.getBookLanguage());
-           } else {
-               languageOther.setValue(data.getBookLanguage());
-           }
+        if (data.getBookLanguage() != null) {
+            if (languageList.contains(data.getBookLanguage())) {
+                bookLanguage.setValue(data.getBookLanguage());
+            } else {
+                languageOther.setValue(data.getBookLanguage());
+            }
         }
 
         //form
-        form.add(title,bookCategory, dateRelease, bookLanguage, languageOther, addBook);
+        form.add(title, bookCategory, dateRelease, bookLanguage, languageOther, addBook);
     }
 }

@@ -6,7 +6,7 @@ public class BookData {
 
     private String title;
     private String bookCategory;
-   private LocalDate dateRelease;
+    private LocalDate dateRelease;
     private String bookLanguage;
 
     public String getTitle() {
@@ -40,6 +40,7 @@ public class BookData {
     public void setBookLanguage(String bookLanguage) {
         this.bookLanguage = bookLanguage;
     }
+
     @Override
     public String toString() {
         return "BookData{" +
